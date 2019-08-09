@@ -2,5 +2,5 @@ import axios from "axios";
 
 export default axios.create({
   baseURL:
-    "https://cors-anywhere.herokuapp.com/https://www.amdoren.com/api/currency.php"
+    "https://cors-anywhere.herokuapp.com/https://api.exchangeratesapi.io/latest"
 });

@@ -10,11 +10,14 @@ class dropdowns extends Component {
   state = {
     from: this.props.symbols[0],
     to: this.props.symbols[0],
-    amount: null
+    amount: null,
+    convert: null
   };
   onSubmit = e => {
     e.preventDefault();
-    this.props.convert(this.state.from, this.state.to, this.state.amount);
+    this.props.convert(this.state.from, this.state.to);
+    console.log(this.state.convert);
+    this.setState({ convert: this.props.amount * this.state.amount });
   };
 
   renderInputTo = () => {
@@ -76,7 +79,7 @@ class dropdowns extends Component {
           className="ui header"
           style={{ fontSize: "30px", textAlign: "center" }}
         >
-          {this.props.amount}
+          {this.state.convert}
         </h1>
         <form className="ui form error" onSubmit={this.onSubmit}>
           {this.renderInputFrom()}
@@ -93,7 +96,7 @@ const mapStateToProps = state => {
   return {
     symbols: Object.keys(state.SymbolReducer),
     title: Object.values(state.SymbolReducer),
-    amount: state.Convert.amount
+    amount: Object.values(state.Convert)
   };
 };
 export default connect(

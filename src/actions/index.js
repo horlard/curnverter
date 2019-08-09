@@ -1,13 +1,11 @@
 import fixerApi from "../api/fixerApi";
 
-const key = "xTCU53gMJGwSP8P5zS5VgefRVHt9as";
+const key = "4d24678aadb8c71e6ec4d8d69f3c78d6";
 
-export const convert = (from, to, amount) => async dispatch => {
-  const response = await fixerApi.get(
-    `?api_key=${key}&from=${from}&to=${to}&amount=${amount}`
-  );
+export const convert = (from, to) => async dispatch => {
+  const response = await fixerApi.get(`?base=${from}&symbols=${to}`);
   dispatch({
     type: "CONVERT",
-    payload: response.data
+    payload: response.data.rates
   });
 };
