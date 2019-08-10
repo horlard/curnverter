@@ -74,7 +74,7 @@ class dropdowns extends Component {
   };
   render() {
     return (
-      <div>
+      <div style={{ marginTop: "50px" }}>
         <h1
           className="ui header"
           style={{ fontSize: "30px", textAlign: "center" }}
