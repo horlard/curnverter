@@ -104,7 +104,6 @@ class dropdowns extends Component {
           {this.renderInputFrom()}
           {this.renderInputTo()}
           {this.renderAmt()}
-          <button className="ui primary button">Convert</button>
         </form>
       </div>
     );
