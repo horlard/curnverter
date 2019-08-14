@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { convert } from "../actions";
 
+import Api from "../api/fixerApi";
+
 class dropdowns extends Component {
   constructor(props) {
     super(props);
@@ -11,13 +13,21 @@ class dropdowns extends Component {
     from: this.props.symbols[0],
     to: this.props.symbols[0],
     amount: null,
-    convert: null
+    convert: null,
+    result: null
   };
-  onSubmit = e => {
+
+  onrates = e => {
     e.preventDefault();
-    this.props.convert(this.state.from, this.state.to);
-    console.log(this.state.convert);
-    this.setState({ convert: this.props.amount * this.state.amount });
+    Api.get(null, {
+      params: {
+        base: this.state.from,
+        symbols: this.state.to
+      }
+    }).then(res => {
+      this.setState({ result: Object.values(res.data.rates) });
+      console.log(this.state.result);
+    });
   };
 
   renderInputTo = () => {
@@ -25,10 +35,7 @@ class dropdowns extends Component {
     return (
       <div className="field">
         <label>to</label>
-        <select
-          className="ui select dropdown"
-          onChange={e => this.setState({ to: e.target.value })}
-        >
+        <select className="ui select dropdown" onChange={this.onToChange}>
           {this.props.symbols.map(symbol => {
             return (
               <option value={symbol} key={symbol}>
@@ -40,15 +47,25 @@ class dropdowns extends Component {
       </div>
     );
   };
-  renderInputFrom = () => {
+  onToChange = e => {
+    console.log(this.state.to);
+    this.setState({ to: e.target.value });
+    this.onrates(e);
+  };
+  OnFromChange = e => {
     console.log(this.state.from);
+    this.setState({ from: e.target.value });
+    this.setState({ to: e.target.value });
+    this.onrates(e);
+  };
+  onAmountChange = e => {
+    this.setState({ convert: this.state.result * e.target.value });
+  };
+  renderInputFrom = () => {
     return (
       <div className="field">
         <label>from</label>
-        <select
-          className="ui select dropdown"
-          onChange={e => this.setState({ from: e.target.value })}
-        >
+        <select className="ui select dropdown" onChange={this.OnFromChange}>
           {this.props.symbols.map(symbol => {
             return (
               <option value={symbol} key={symbol}>
@@ -60,19 +77,21 @@ class dropdowns extends Component {
       </div>
     );
   };
+
   renderAmt = () => {
-    console.log(this.state.amount);
     return (
       <div className="field">
         <label>Amount</label>
-        <input
-          type="text"
-          onChange={e => this.setState({ amount: e.target.value })}
-        />
+        {!this.state.result ? (
+          <input type="number" disabled />
+        ) : (
+          <input type="number" onChange={this.onAmountChange} />
+        )}
       </div>
     );
   };
   render() {
+    console.log(this.props.amount);
     return (
       <div style={{ marginTop: "50px" }}>
         <h1
@@ -81,7 +100,7 @@ class dropdowns extends Component {
         >
           {this.state.convert}
         </h1>
-        <form className="ui form error" onSubmit={this.onSubmit}>
+        <form className="ui form error">
           {this.renderInputFrom()}
           {this.renderInputTo()}
           {this.renderAmt()}
@@ -95,7 +114,6 @@ class dropdowns extends Component {
 const mapStateToProps = state => {
   return {
     symbols: Object.keys(state.SymbolReducer),
-    title: Object.values(state.SymbolReducer),
     amount: Object.values(state.Convert)
   };
 };
