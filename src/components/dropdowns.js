@@ -18,6 +18,7 @@ class dropdowns extends Component {
   };
 
   onrates = e => {
+    ///const key = "30e1e13cb7ab8f220881d86e22518cfd";
     e.preventDefault();
     Api.get(null, {
       params: {
@@ -93,7 +94,7 @@ class dropdowns extends Component {
   render() {
     console.log(this.props.amount);
     return (
-      <div style={{ marginTop: "50px" }}>
+      <div style={{ paddingTop: "50px" }}>
         <h1
           className="ui header"
           style={{ fontSize: "30px", textAlign: "center" }}
