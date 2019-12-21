@@ -1,0 +1,42 @@
+.selection select {
+    width: 100%;
+    -webkit-appearance: button;
+    outline: none;
+    padding: 10px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px
+}
+.selection::before {
+    content:'keyboard_arrow_down';
+    font-family: 'material icons';
+    font-size: 25px;
+    pointer-events: none;
+    position: absolute;
+    top: 35px;
+    right: 35px
+}
+
+.selection label {
+    color: #fff;
+    margin-bottom: 5px;
+    display: block
+}
+.selection {
+    position: relative;
+    padding: 0 30px;
+}
+.inputField label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+}
+.inputField input {
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid black
+}
+.inputField {
+    padding: 0 30px;
+}

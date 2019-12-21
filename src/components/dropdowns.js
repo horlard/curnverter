@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { convert } from "../actions";
 
 import Api from "../api/fixerApi";
+import '../dropdown.css'
 
 class dropdowns extends Component {
   constructor(props) {
@@ -34,9 +35,9 @@ class dropdowns extends Component {
   renderInputTo = () => {
     console.log(this.state.to);
     return (
-      <div className="field">
-        <label>to</label>
-        <select className="ui select dropdown" onChange={this.onToChange}>
+      <div className="selection">
+        <label>To</label>
+        <select onChange={this.onToChange}>
           {this.props.symbols.map(symbol => {
             return (
               <option value={symbol} key={symbol}>
@@ -64,9 +65,9 @@ class dropdowns extends Component {
   };
   renderInputFrom = () => {
     return (
-      <div className="field">
-        <label>from</label>
-        <select className="ui select dropdown" onChange={this.OnFromChange}>
+      <div className="selection">
+        <label>From</label>
+        <select onChange={this.OnFromChange}>
           {this.props.symbols.map(symbol => {
             return (
               <option value={symbol} key={symbol}>
@@ -81,7 +82,7 @@ class dropdowns extends Component {
 
   renderAmt = () => {
     return (
-      <div className="field">
+      <div className="inputField">
         <label>Amount</label>
         {!this.state.result ? (
           <input type="number" disabled />
@@ -94,14 +95,14 @@ class dropdowns extends Component {
   render() {
     console.log(this.props.amount);
     return (
-      <div style={{ paddingTop: "50px" }}>
+      <div>
         <h1
-          className="ui header"
-          style={{ fontSize: "30px", textAlign: "center" }}
+          className=""
+          style={{ fontSize: "30px", textAlign: "center",color:'#fff' }}
         >
           {this.state.convert}
         </h1>
-        <form className="ui form error">
+        <form className="">
           {this.renderInputFrom()}
           {this.renderInputTo()}
           {this.renderAmt()}
