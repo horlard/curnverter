@@ -1,8 +1,10 @@
 import React from 'react';
 
+import '../card.css';
+
  const styles= {
      div : {
-         width:'500px',
+        width:'500px',
          background:'#8787f3',
          height:'300px',
          borderRadius:'10px',
@@ -13,16 +15,17 @@ import React from 'react';
          display:'flex',
          justifyContent:'center',
          alignItems:'center',
-         height:'100vh',
-         background:'#5d5dbb'
+         height:'100vh'
      }
  }
 const Card=(props)=> {
     return (
-        <div style={styles.container}>
-            <div style={styles.div}>
+        <div style={styles.container} className='card'>
+            <div style={styles.div} >
                 {props.children}
             </div>
+            
+
         </div>
         
     )
