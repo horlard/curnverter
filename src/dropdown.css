@@ -1,6 +1,6 @@
 .selection select {
     width: 100%;
-    -webkit-appearance: button;
+    -webkit-appearance: none;
     outline: none;
     padding: 10px 10px;
     border-radius: 10px;
