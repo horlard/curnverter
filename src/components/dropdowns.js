@@ -57,7 +57,6 @@ class dropdowns extends Component {
   OnFromChange = e => {
     console.log(this.state.from);
     this.setState({ from: e.target.value });
-    this.setState({ to: e.target.value });
     this.onrates(e);
   };
   onAmountChange = e => {
